@@ -1,0 +1,122 @@
+%%HP: T(3)A(R)F(.);
+DIR
+  SJEKK
+    \<< GEV TYPE
+      IF 3 ==
+      THEN GEV SIZE
+LIST\-> DROP
+        IF 5 ==
+        THEN GEV V\->
+        ELSE 0 0 0
+0 0
+        END 'G5'
+STO 'G4' STO 'G3'
+STO 'G2' STO 'G1'
+STO 0 'SUM' STO
+      ELSE 0 0 0 0
+0 'G5' STO 'G4' STO
+'G3' STO 'G2' STO
+'G1' STO
+      END 0 'HTM'
+STO 0 'TTM' STO 0
+'RM' STO R SIZE
+LIST\-> DROP2 'n' STO
+1 n
+      FOR RT 0
+'TTT' STO 0 'HTT'
+STO R RT GETR V\-> 1
+7
+        FOR GT 'T'
+STO V V\-> 1 9
+          FOR TT
+            IF T ==
+            THEN
+              IF TT
+3 <
+              THEN
+TTT 1 + 'TTT' STO
+              ELSE
+HTT 1 + 'HTT' STO
+              END
+            END
+          NEXT
+        NEXT
+        IF HTT 7 ==
+        THEN RT
+"Premie 1, rekke"
+\->TAG SUM G1 + 'SUM'
+STO
+        END
+        IF HTT 6 \>=
+        THEN
+          IF TTT 1
+\>=
+          THEN RT
+"Premie 2, rekke"
+\->TAG SUM G2 + 'SUM'
+STO
+          END RT
+"Premie 3, rekke"
+\->TAG SUM G3 + 'SUM'
+STO
+        END
+        IF HTT 5 \>=
+        THEN RT
+"Premie 4, rekke"
+\->TAG SUM G4 + 'SUM'
+STO
+        END
+        IF HTT 4 \>=
+TTT 1 \>= AND
+        THEN RT
+"Premie 5, rekke"
+\->TAG SUM G5 + 'SUM'
+STO
+        END
+        IF HTT HTM
+== TTT TTM > AND
+HTT HTM > OR
+        THEN HTT
+'HTM' STO TTT 'TTM'
+STO RT 'RM' STO
+        END
+      NEXT SUM
+"Tot gevinst" \->TAG
+      IF SUM 0 ==
+      THEN
+"Best R:" RM \->STR +
+" H:" + HTM \->STR +
+" T:" + TTM \->STR +
+      END { SUM TTT
+HTT T n G1 G2 G3 G4
+G5 HTM TTM RM }
+PURGE
+    \>>
+  R
+[[ 1 2 3 4 5 6 7 ]
+ [ 34 33 32 31 30 29 28 ]
+ [ 8 9 10 11 12 13 14 ]]
+  V
+[ 1 2 3 4 5 6 7 33 34 ]
+  GEV
+[ 1000000 100000 10000 1000 100 ]
+  BRUK
+"Bruksanvisning LOTTO:
+Lag en matrise R som
+skal inneholde dine
+rekker (n x 7).
+Lag en vektor V som
+inneh. vinnerrekka
+med tilleggstall (9).
+SJEKK for \229 vise
+premier. Legg evt.
+gevinstsummene i
+variabelen GEV, en
+vektor: [G1 G2..]
+(5)."
+  GETR
+    \<< SWAP TRN DUP
+SIZE 2 2 SUB 0 CON
+ROT 1 PUT *
+    \>>
+END
